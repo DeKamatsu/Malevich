@@ -2,6 +2,8 @@ from PIL import Image, ImageDraw, ImageChops
 import random
 import colorsys
 
+"""он рисует...сам...как может"""
+
 
 def random_color():
     h = random.random()
@@ -33,34 +35,33 @@ def draw(path: str):
                       size=(image_size_px, image_size_px),
                       color=image_bg_color)
 
-    # draw some lines
+    # создаем точки
     points = []
 
-    # Generate the points
-    for _ in range(10):
+    for _ in range(15):
         random_point = (random.randint(padding, image_size_px-padding),
                         random.randint(padding, image_size_px-padding))
         points.append(random_point)
 
-    # Bounding box
+    # рисуем рамку
     min_x = min([p[0] for p in points])
     max_x = max([p[0] for p in points])
     min_y = min([p[1] for p in points])
     max_y = max([p[1] for p in points])
 
-    # Center the image
+    # центруем изображение
     delta_x = min_x - (image_size_px - max_x)
     delta_y = min_y - (image_size_px - max_y)
 
     for _, point in enumerate(points):
         points[_] = (point[0] - delta_x // 2, point[1] - delta_y // 2)
 
-    # Draw the points
+    # рисуем
     thickness = 0
     n_points = len(points) - 1
     for _, point in enumerate(points):
 
-        # Overlay canvas
+        # накладываем изображение
         overlay_image = Image.new("RGB",
                                   size=(image_size_px, image_size_px),
                                   color=image_bg_color)
@@ -83,5 +84,5 @@ def draw(path: str):
 
 
 if __name__ == "__main__":
-    for i in range(10):
+    for i in range(4):
         draw(path=f"output files/test_image_{i}.png")
