@@ -84,4 +84,4 @@ def draw(path: str):
 
 if __name__ == "__main__":
     for i in range(10):
-        draw(path=f"test_image_{i}.png")
+        draw(path=f"output files/test_image_{i}.png")
